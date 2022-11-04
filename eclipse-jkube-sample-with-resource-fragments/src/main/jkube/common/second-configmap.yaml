@@ -1,0 +1,4 @@
+data:
+  report_date: "2020-01-01"
+  application.properties: |
+    spring.profiles.active=dev

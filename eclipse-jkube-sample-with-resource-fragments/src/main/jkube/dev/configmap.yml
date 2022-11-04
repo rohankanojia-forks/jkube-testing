@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  creationTimestamp: 2017-12-27T18:36:28Z
+  name: game-config-env-file
+data:
+  allowed: '"true"'
+  enemies: aliens
+  lives: "3"

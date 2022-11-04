@@ -1,0 +1,29 @@
+plugins {
+  id "fish.payara.micro-gradle-plugin" version "1.0.4"
+}
+
+group = 'org.eclipse.jkube.payara'
+version = '1.0-SNAPSHOT'
+
+description = "MicroProfile Starter example"
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+payaraMicro {
+    payaraVersion = '5.2021.1'
+    deployWar = true
+    useUberJar = true
+    daemon = false
+    commandLineOptions = [port: 8180, contextroot : '/']
+}
+
+dependencies {
+    providedCompile 'org.eclipse.microprofile:microprofile:4.0.1'
+    
+    
+}
+
+repositories {
+    mavenCentral()
+}

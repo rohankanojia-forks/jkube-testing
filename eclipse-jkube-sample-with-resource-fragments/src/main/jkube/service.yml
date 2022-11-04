@@ -1,0 +1,5 @@
+spec:
+  type: LoadBalancer
+  ports:
+    - name: httpnarere
+      port: 8240

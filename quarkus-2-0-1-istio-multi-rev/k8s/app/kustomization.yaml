@@ -1,0 +1,8 @@
+namespace: demos-1-8-6
+resources:
+  - namespace.yaml
+  - sa.yaml
+  - role.yaml
+  - role-binding.yaml
+  - deployment.yaml
+  - service.yaml

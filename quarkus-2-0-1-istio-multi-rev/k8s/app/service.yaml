@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/path: /metrics
+    prometheus.io/port: "9779"
+  labels:
+    app: istio-multi-rev-demo
+    version: v1.0
+  name: istio-multi-rev-demo
+spec:
+  ports:
+    - name: http
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    app: istio-multi-rev-demo
+    version: v1.0

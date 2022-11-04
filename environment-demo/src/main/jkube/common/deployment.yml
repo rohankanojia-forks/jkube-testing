@@ -1,0 +1,10 @@
+spec:
+  template:
+    spec:
+      containers:
+        - env:
+            - name: GREET_ENV
+              valueFrom:
+                configMapKeyRef:
+                  name: ${name}
+                  key: greet.env

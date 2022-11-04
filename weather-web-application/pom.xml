@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>weather-web-application</artifactId>
+    <packaging>war</packaging>
+    <groupId>org.eclipse.jkube</groupId>
+    <version>1.0.0-SNAPSHOT</version>
+    <name>Simple Weather Application</name>
+    <description>Simple weather application using JBoss Servlet APIs</description>
+    <properties>
+        <jakarta.enterprise.cdi-api.version>3.0.0-M4</jakarta.enterprise.cdi-api.version>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <jkube.enricher.jkube-service.type>NodePort</jkube.enricher.jkube-service.type>
+        <okhttp.version>3.12.12</okhttp.version>
+        <kubernetes-maven-plugin.version>1.10-SNAPSHOT</kubernetes-maven-plugin.version>
+        <apikey-secret.mountPath>/etc/foo</apikey-secret.mountPath>
+    </properties>
+
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <distribution>repo</distribution>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
+        </license>
+    </licenses>
+    
+    <dependencies>
+
+        <dependency>
+            <groupId>org.jboss.spec.javax.annotation</groupId>
+            <artifactId>jboss-annotations-api_1.3_spec</artifactId>
+            <scope>provided</scope>
+            <version>2.0.1.Final</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jboss.spec.javax.servlet</groupId>
+            <artifactId>jboss-servlet-api_4.0_spec</artifactId>
+            <scope>provided</scope>
+            <version>2.0.0.Final</version>
+        </dependency>
+
+        <dependency>
+         <groupId>com.squareup.okhttp3</groupId>
+         <artifactId>okhttp</artifactId>
+         <version>${okhttp.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.eclipse.jkube</groupId>
+                <artifactId>kubernetes-maven-plugin</artifactId>
+                <version>${kubernetes-maven-plugin.version}</version>
+                <configuration>
+                  <images>
+                    <image>
+                      <name>%g/%a:%l</name>
+                      <build>
+                        <from>payara/micro:latest</from>
+                        <assembly>
+                          <mode>dir</mode>
+                          <targetDir>/opt/payara/deployments</targetDir>
+                          <layers>
+                            <layer>
+                              <id>custom-assembly</id>
+                              <files>
+                                <file>
+                                  <source>target/${project.artifactId}-${project.version}.war</source>
+                                  <outputDirectory>.</outputDirectory>
+                                </file>
+                              </files>
+                            </layer>
+                            <layer>
+                              <id>custom-assembly-file</id>
+                              <files>
+                                <file>
+                                  <source>license.txt</source>
+                                  <outputDirectory>.</outputDirectory>
+                                </file>
+                              </files>
+                            </layer>
+                          </layers>
+                        </assembly>
+                        <ports>
+                          <port>8080</port>
+                        </ports>
+                      </build>
+                    </image>
+                  </images>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.eclipse.jkube</groupId>
+                <artifactId>openshift-maven-plugin</artifactId>
+                <version>${kubernetes-maven-plugin.version}</version>
+
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

@@ -1,0 +1,10 @@
+micronaut:
+  application:
+    name: micronautHealth
+netty:
+  default:
+    allocator:
+      max-order: 3
+endpoints:
+  health:
+    enabled: true      

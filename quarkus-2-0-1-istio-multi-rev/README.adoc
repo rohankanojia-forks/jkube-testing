@@ -1,0 +1,68 @@
+= Istio Multi Revision Demo
+
+== Pre-requisites
+* https://asdf-vm.com[asdf-vm]
+* Kubernetes Cluster
+** https://minikube.sigs.k8s.io/docs/[minikube]
+** https://civo.com[Civo]
+*  https://docs.solo.io/gloo-edge/latest/getting_started/[Gloo Edge]
+
+== Download Sources
+
+[source,bash]
+----
+git clone https://github.com/kameshsampath/isti-multi-rev-demo
+----
+
+We will refer to the cloned folder as `$PROJECT_HOME`
+
+== Install asdf-istio plugin
+
+[source,bash]
+----
+asdf plugin-add istio https://github.com/kameshsampath/asdf-istio
+----
+
+== Setup Kubernetes Cluster
+
+For the examples we will be using the minikube as our Kubernetes cluster, run the following command to start single node Kubernetes cluster:
+
+[source,bash]
+----
+$PROJECT_HOME/bin/start-minikube-setup.sh
+----
+
+== Deploy Istio Control Plane
+
+Download and install Istio v1.8.6:
+
+[source,bash]
+----
+cd $PROJECT_HOME
+asdf install
+----
+
+Once Istio is downloaded, let us setup an Istio control plane with a pinned revision `1.8.6`,
+
+[source,bash]
+----
+$PROJECT_HOME/bin/install.sh
+----
+
+Let us now verify the install by selecting the pods in `istio-system` namespace and list the label `istio.io/rev':
+
+[source]
+----
+kubectl get pods -n istio-system -L'istio.io/rev'
+----
+
+[source,bash]
+----
+NAME                            READY   STATUS    RESTARTS   AGE   REV
+istiod-1-8-6-869d57f467-dkxpq   1/1     Running   0          57m   1-8-6 #<1>
+----
+<1> As you see in the output the Istio Control plane is configured with revision `v1.8.6`, the revision name could be any string but for better clarity the version numbers are used.
+
+== Deploy application
+
+The application is a simple greeter application with a REST API at `/api/hello` that sends a JSON response with a greeting, Istio revision used and service revision.

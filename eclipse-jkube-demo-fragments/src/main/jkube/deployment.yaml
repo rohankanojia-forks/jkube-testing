@@ -1,0 +1,7 @@
+spec:
+  selector:
+    matchLabels:
+      moo: bar
+  template:
+    spec:
+      replicas: 2

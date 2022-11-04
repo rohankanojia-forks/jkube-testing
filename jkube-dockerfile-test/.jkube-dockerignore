@@ -1,0 +1,10 @@
+.git
+.git/**
+.idea
+.idea/**
+target/classes/**
+target/maven-status/**
+src/**
+pom.xml
+docker-file-simple.iml
+jkube-dockerinclude
