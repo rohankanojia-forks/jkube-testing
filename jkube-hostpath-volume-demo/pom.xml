@@ -67,6 +67,22 @@
         <groupId>org.eclipse.jkube</groupId>
         <artifactId>kubernetes-maven-plugin</artifactId>
         <version>${jkube.version}</version>
+        <configuration>
+          <resources>
+            <containerPrivileged>true</containerPrivileged>
+            <volumes>
+              <volume>
+                  <name>test-volume</name>
+                  <type>hostPath</type>
+                  <hostPathType>Directory</hostPathType>
+                  <path>/data</path>
+                  <mounts>
+                    <mount>/deployments/uploads</mount>
+                  </mounts>
+              </volume>
+            </volumes>
+          </resources>
+        </configuration>
       </plugin>
       <plugin>
         <groupId>${quarkus.platform.group-id}</groupId>

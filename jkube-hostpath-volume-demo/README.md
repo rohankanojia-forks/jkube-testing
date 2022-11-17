@@ -7,7 +7,7 @@ This application exposes one endpoint:
 - `POST` `/client/multipart` recieves MultiPartBody in request body.
 
 User uploads file via this endpoint to `/deployments/uploads` folder. This folder is also mounted as hostpath volume
-so any changes to this directory would be reflected in node's `/data` directory (see `src/main/jkube/deployment.yaml`).
+so any changes to this directory would be reflected in node's `/data` directory (see `pom.xml`).
 
 You can run application locally using this command:
 ```bash
