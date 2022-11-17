@@ -67,6 +67,20 @@
         <groupId>org.eclipse.jkube</groupId>
         <artifactId>kubernetes-maven-plugin</artifactId>
         <version>${jkube.version}</version>
+        <configuration>
+          <resources>
+            <volumes>
+              <volume>
+                  <name>task-pv-storage</name>
+                  <type>persistentVolumeClaim</type>
+                  <claimRef>task-pv-claim</claimRef>
+                  <mounts>
+                    <mount>/deployments/uploads</mount>
+                  </mounts>
+              </volume>
+            </volumes>
+          </resources>
+        </configuration>
       </plugin>
       <plugin>
         <groupId>${quarkus.platform.group-id}</groupId>

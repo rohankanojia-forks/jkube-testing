@@ -6,7 +6,7 @@ This is a demo application showcasing how to use Kubernetes Local volume with Ku
 This application exposes one endpoint:
 - `POST` `/client/multipart` recieves MultiPartBody in request body.
 
-User uploads file via this endpoint to `/deployments/uploads` folder. This folder is also mounted as volume which uses a PersistentVolumeClaim to request volume from `minikube-pv` volume we created earlier. Any changes to this directory would be reflected in node's `/mnt/vda1/data` directory (see `src/main/jkube/deployment.yaml`).
+User uploads file via this endpoint to `/deployments/uploads` folder. This folder is also mounted as volume which uses a PersistentVolumeClaim to request volume from `minikube-pv` volume we created earlier. Any changes to this directory would be reflected in node's `/mnt/vda1/data` directory (see `pom.xml`).
 
 You can run application locally using this command:
 ```bash
