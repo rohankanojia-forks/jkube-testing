@@ -1,0 +1,11 @@
+spec:
+  template:
+    spec:
+      volumes:
+        - name: task-pv-storage
+          persistentVolumeClaim:
+            claimName: task-pv-claim
+      containers:
+        - volumeMounts:
+            - name: task-pv-storage
+              mountPath: /deployments/uploads
