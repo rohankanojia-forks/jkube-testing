@@ -1,0 +1,54 @@
+---
+apiVersion: v1
+kind: List
+items:
+- apiVersion: v1
+  kind: Service
+  metadata:
+    labels:
+      app: chuck-norris
+    name: chuck-norris
+  spec:
+    ports:
+    - name: http
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+    selector:
+      app: chuck-norris
+    type: NodePort
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    labels:
+      app: chuck-norris
+    name: chuck-norris
+  spec:
+    replicas: 1
+    revisionHistoryLimit: 2
+    selector:
+      matchLabels:
+        app: chuck-norris
+    template:
+      metadata:
+        labels:
+          app: chuck-norris
+        name: chuck-norris
+      spec:
+        containers:
+        - env:
+          - name: KUBERNETES_NAMESPACE
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.namespace
+          - name: HOSTNAME
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.name
+          image: marcnuri/chuck-norris:latest
+          imagePullPolicy: IfNotPresent
+          name: spring-boot
+          ports:
+          - containerPort: 8080
+            name: http
+            protocol: TCP

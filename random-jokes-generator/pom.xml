@@ -3,7 +3,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.eclipse.jkube.demos</groupId>
-  <artifactId>jkube-local-volume-demo</artifactId>
+  <artifactId>random-jokes-generator</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <properties>
     <compiler-plugin.version>3.8.1</compiler-plugin.version>
@@ -12,11 +12,10 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
     <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
-    <quarkus.platform.version>2.14.0.Final</quarkus.platform.version>
+    <quarkus.platform.version>2.14.1.Final</quarkus.platform.version>
     <skipITs>true</skipITs>
     <surefire-plugin.version>3.0.0-M7</surefire-plugin.version>
-    <jkube.version>1.11-SNAPSHOT</jkube.version>
-    <jkube.enricher.jkube-service.type>NodePort</jkube.enricher.jkube-service.type>
+    <jkube.version>1.10.1</jkube.version>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -32,23 +31,15 @@
   <dependencies>
     <dependency>
       <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-resteasy-reactive</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-rest-client-reactive</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
       <artifactId>quarkus-arc</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-resteasy</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-resteasy-multipart</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-rest-client</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-smallrye-openapi</artifactId>
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
@@ -63,25 +54,6 @@
   </dependencies>
   <build>
     <plugins>
-      <plugin>
-        <groupId>org.eclipse.jkube</groupId>
-        <artifactId>kubernetes-maven-plugin</artifactId>
-        <version>${jkube.version}</version>
-        <configuration>
-          <resources>
-            <volumes>
-              <volume>
-                  <name>task-pv-storage</name>
-                  <type>persistentVolumeClaim</type>
-                  <claimRef>task-pv-claim</claimRef>
-                  <mounts>
-                    <mount>/deployments/uploads</mount>
-                  </mounts>
-              </volume>
-            </volumes>
-          </resources>
-        </configuration>
-      </plugin>
       <plugin>
         <groupId>${quarkus.platform.group-id}</groupId>
         <artifactId>quarkus-maven-plugin</artifactId>
@@ -134,6 +106,27 @@
             </configuration>
           </execution>
         </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.eclipse.jkube</groupId>
+        <artifactId>openshift-maven-plugin</artifactId>
+        <version>${jkube.version}</version>
+        <configuration>
+          <remoteDevelopment>
+            <remoteServices>
+              <remoteService>
+                <hostname>chuck-norris</hostname> <!-- Name of Service -->
+                <port>8080</port>                 <!-- Service port -->
+                <localPort>8081</localPort>       <!-- Local Port where to expose -->
+              </remoteService>
+              <remoteService>
+                <hostname>jokes</hostname>  <!-- Name of Service -->
+                <port>8080</port>           <!-- Service Port -->
+                <localPort>8082</localPort> <!-- Local Port where to expose -->
+              </remoteService>
+            </remoteServices>
+          </remoteDevelopment>
+        </configuration>
       </plugin>
     </plugins>
   </build>
