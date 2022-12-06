@@ -33,7 +33,7 @@ kubernetes {
     }
     authConfig {
         username = "rohankanojia"
-        password = "roh##46705R"
+        password = "secret"
     }
     followLog = false
 }

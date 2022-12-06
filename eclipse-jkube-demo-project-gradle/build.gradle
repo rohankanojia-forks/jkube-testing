@@ -2,8 +2,8 @@ plugins {
     id 'org.springframework.boot' version '2.6.2'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
-    id 'org.eclipse.jkube.openshift' version '1.10-SNAPSHOT'
-    id 'org.eclipse.jkube.kubernetes' version '1.10-SNAPSHOT'
+    id 'org.eclipse.jkube.openshift' version '1.10.1'
+    id 'org.eclipse.jkube.kubernetes' version '1.10.1'
 }
 
 configurations {
@@ -37,5 +37,29 @@ kubernetes {
                 type = 'NodePort'
             }
         }
+    }
+    remoteDevelopment {
+        localServices = [{
+            serviceName = "eclipse-jkube-demo-project"
+            type = "NodePort"
+            port = 8080
+        }]
+    }
+}
+
+openshift {
+    enricher {
+        config {
+            'jkube-service' {
+                type = 'NodePort'
+            }
+        }
+    }
+    remoteDevelopment {
+        localServices = [{
+            serviceName = "eclipse-jkube-demo-project"
+            type = "NodePort"
+            port = 8080
+        }]
     }
 }

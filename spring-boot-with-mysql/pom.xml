@@ -53,6 +53,42 @@
             </plugin>
             <plugin>
                 <groupId>org.eclipse.jkube</groupId>
+                <artifactId>openshift-maven-plugin</artifactId>
+                <version>${jkube.version}</version>
+                <configuration>
+                    <remoteDevelopment>
+                        <!--
+                        <localServices>
+                            <localService>
+                                <serviceName>${project.artifactId}</serviceName>
+                                <port>8080</port>
+                                <type>NodePort</type>
+                            </localService>
+                        </localServices>
+                            <remoteService>
+                                <hostname>mysql</hostname>
+                                <port>3306</port>
+                            </remoteService>
+                        </remoteServices>
+                        -->
+                        <remoteServices>
+                            <remoteService>
+                                <hostname>service1</hostname> <!-- Name of Service -->
+                                <port>8080</port>                 <!-- Service port -->
+                                <localPort>8081</localPort>       <!-- Local Port where to expose -->
+                            </remoteService>
+                            <remoteService>
+                                <hostname>service2</hostname>  <!-- Name of Service -->
+                                <port>8080</port>           <!-- Service Port -->
+                                <localPort>8082</localPort> <!-- Local Port where to expose -->
+                            </remoteService>
+                        </remoteServices>
+
+                    </remoteDevelopment>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.eclipse.jkube</groupId>
                 <artifactId>kubernetes-maven-plugin</artifactId>
                 <version>${jkube.version}</version>
                 <configuration>
@@ -65,13 +101,25 @@
                                 <type>NodePort</type>
                             </localService>
                         </localServices>
-                        -->
-                        <remoteServices>
                             <remoteService>
                                 <hostname>mysql</hostname>
                                 <port>3306</port>
                             </remoteService>
                         </remoteServices>
+                        -->
+                        <remoteServices>
+                            <remoteService>
+                                <hostname>service1</hostname> <!-- Name of Service -->
+                                <port>8080</port>                 <!-- Service port -->
+                                <localPort>8081</localPort>       <!-- Local Port where to expose -->
+                            </remoteService>
+                            <remoteService>
+                                <hostname>service2</hostname>  <!-- Name of Service -->
+                                <port>8080</port>           <!-- Service Port -->
+                                <localPort>8082</localPort> <!-- Local Port where to expose -->
+                            </remoteService>
+                        </remoteServices>
+
                     </remoteDevelopment>
 
                 </configuration>

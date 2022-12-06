@@ -23,9 +23,10 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
         <docker.user>rohankanojia</docker.user>
-        <jkube.version>1.10-SNAPSHOT</jkube.version>
+        <jkube.version>1.11-SNAPSHOT</jkube.version>
         <jkube.enricher.jkube-service.type>NodePort</jkube.enricher.jkube-service.type>
         <jkube.generator.name>docker.io/${docker.user}/random-generator:${project.version}</jkube.generator.name>
+        <org.slf4j.simpleLogger.defaultLogLevel>trace</org.slf4j.simpleLogger.defaultLogLevel>
     </properties>
 
     <dependencies>
