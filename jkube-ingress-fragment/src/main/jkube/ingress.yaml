@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: ${project.artifactId}
+  annotations:
+    ingress.kubernetes.io/rewrite-target: /
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+spec:
+  tls:
+  - hosts:
+    - foo.example.com
+    secretName: letsencrypt-${project.artifactId}
+  rules:
+  - host: foo.example.com
+    http:
+      paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: ${project.artifactId}
+              port: 
+                number: 8080
