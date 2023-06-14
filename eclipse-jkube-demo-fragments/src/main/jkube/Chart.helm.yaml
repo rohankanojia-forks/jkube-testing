@@ -1,0 +1,4 @@
+apiVersion: v1
+home: rokumar
+icon: https://example.com/icon
+version: ${jkube.chart.version}

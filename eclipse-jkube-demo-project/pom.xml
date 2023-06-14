@@ -23,9 +23,15 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
         <docker.user>rohankanojia</docker.user>
-        <jkube.version>1.11-SNAPSHOT</jkube.version>
+        <jkube.version>1.13-SNAPSHOT</jkube.version>
         <jkube.enricher.jkube-service.type>NodePort</jkube.enricher.jkube-service.type>
-        <jkube.generator.name>docker.io/${docker.user}/random-generator:${project.version}</jkube.generator.name>
+        <!--jkube.generator.name>myregistry.192.168.39.103.nip.io/random-generator:${project.version}</jkube.generator.name-->
+        <!--jkube.generator.name>localhost:5000/%a:%l</jkube.generator.name-->
+        <!--jkube.generator.name>quay.io/rohankanojia/%a:%l</jkube.generator.name-->
+        <!--jkube.generator.name>rohankanojia/%a:%l</jkube.generator.name-->
+        <!--jkube.generator.name>r0han.kanojia/%a:%l</jkube.generator.name-->
+        <!--jkube.generator.name>quay.io/r0han.kanojia/%a:%l</jkube.generator.name-->
+        <jkube.generator.name>%a:%l</jkube.generator.name>
         <org.slf4j.simpleLogger.defaultLogLevel>trace</org.slf4j.simpleLogger.defaultLogLevel>
     </properties>
 
@@ -66,9 +72,33 @@
                 <artifactId>kubernetes-maven-plugin</artifactId>
                 <version>${jkube.version}</version>
                 <configuration>
-                  <resources>
-                    <serviceAccount>noob</serviceAccount>
-                  </resources>
+                  <helm>
+                      <stableRepository>
+                          <name>quay.io</name>
+                          <url>https://quay.io/rohankanojia</url>
+                          <type>OCI</type>
+                          
+                          <!--
+                          -->
+                          <!--
+                          <url>http://localhost:5000</url>
+                          <name>local</name>
+                          <type>OCI</type>
+                          <username>foo</username>
+                          <password>secret</password>
+                          -->
+                          <!--
+                          <name>ghcr.io</name>
+                          <url>https://ghcr.io/r0haaaan</url>
+                          <type>OCI</type>
+                          -->
+                          <!--
+                          <name>Docker</name>
+                          <url>https://registry-1.docker.io/rohankanojia</url>
+                          <type>OCI</type>
+                          -->
+                      </stableRepository>
+                  </helm>
                 </configuration>
             </plugin>
             

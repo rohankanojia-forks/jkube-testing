@@ -1,0 +1,161 @@
+spec:
+  replicas: ${replicas}
+  template:
+    spec:
+      volumes:
+        - name: sample
+          emptyDir: { }
+        - name: secure-properties-volume
+          secret:
+            secretName: naa-db-properties
+        - name: common-truststore-volume
+          secret:
+            secretName: namespace-common
+        - name: sftp-truststore-volume
+          secret:
+            secretName: sftp-truststore
+        - name: hawkular-openshift-agent
+          configMap:
+            name: hawkular-reporting-service-agent
+            defaultMode: 420
+        - name: volume-circuit-status-logmon-cfg
+          configMap:
+            name: circuit-status-logmon
+            defaultMode: 511
+            items:
+              - key: circuit-status-logmon.cfg
+                path: logmon.cfg
+        - configMap:
+            defaultMode: 420
+            name: grokexporter-naa-reporting-config
+          name: grokconfigmap-volume
+      containers:
+      - args:
+         - /usr/local/s2i/run
+         - "${appargs}"
+        name: naa-reporting-service
+        volumeMounts:
+          - name: sample
+            mountPath: /sample
+        ports:
+          -
+            name: http
+            containerPort: 8080
+            protocol: TCP
+          -
+            name: managementhttp
+            containerPort: 8081
+            protocol: TCP
+          -
+            name: prometheus
+            containerPort: 9779
+            protocol: TCP
+          -
+            name: jolokia
+            containerPort: 8778
+            protocol: TCP
+          -
+            name: jgroups
+            containerPort: 8889
+            protocol: TCP
+        env:
+          -
+            name: JAEGER_SAMPLER_PARAM # This defines the sampling rate, i.e. the rate of which the traces should be sent to the collector.
+            valueFrom:
+              configMapKeyRef:
+                name: naa-reporting-service
+                key: jaeger_sampler_param
+        resources:
+            requests:
+              cpu: 50m
+              memory: 250Mi
+            limits:
+              cpu: 500m
+              memory: 1280Mi
+        livenessProbe:
+          httpGet:
+            path: /management/health
+            port: 8081
+            scheme: HTTP
+          initialDelaySeconds: 140
+          timeoutSeconds: 300
+          periodSeconds: 20
+          successThreshold: 1
+          failureThreshold: 5
+        readinessProbe:
+          httpGet:
+            path: /management/info
+            port: 8081
+            scheme: HTTP
+          initialDelaySeconds: 120
+          timeoutSeconds: 300
+          periodSeconds: 20
+          successThreshold: 1
+          failureThreshold: 5
+
+      - image: "company/uim-robot:1.4.0"
+        volumeMounts:
+          - name: sample
+            mountPath: /sample
+          - name: volume-circuit-status-logmon-cfg
+            mountPath: /uimconfig/logmon.cfg
+            subPath: logmon.cfg
+        imagePullPolicy: Always
+        name: uimrobotbin
+        ports:
+          - containerPort: 48000
+            protocol: TCP
+          - containerPort: 48001
+            protocol: TCP
+          - containerPort: 48002
+            protocol: TCP
+        env:
+          - name: UIM_OS_USER1
+            value: eu.company.ms.naa
+          - name: UIM_OS_USER2
+            value: ${artifactId}
+          - name: HUB_IP
+            valueFrom:
+              secretKeyRef:
+                key: HUB-IP
+                name: uimhub-secret
+          - name: HUB_DOMAIN
+            valueFrom:
+              secretKeyRef:
+                key: HUB-DOMAIN
+                name: uimhub-secret
+          - name: HUB_USER
+            valueFrom:
+              secretKeyRef:
+                key: HUB-USER
+                name: uimhub-secret
+          - name: HUB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+               key: HUB-PASSWORD
+               name: uimhub-secret
+        resources:
+          requests:
+            cpu: 1m
+            memory: 100Mi
+          limits:
+            cpu: 10m
+            memory: 150Mi
+        readinessProbe:
+          failureThreshold: 3
+          initialDelaySeconds: 40
+          periodSeconds: 10
+          successThreshold: 1
+          tcpSocket:
+            port: 48000
+          timeoutSeconds: 1
+        livenessProbe:
+          failureThreshold: 3
+          initialDelaySeconds: 180
+          periodSeconds: 10
+          successThreshold: 1
+          tcpSocket:
+            port: 48000
+          timeoutSeconds: 1
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File

@@ -1,0 +1,12 @@
+spec:
+  template:
+    metadata:
+      annotations:
+        dapr.io/enabled: "true"
+        dapr.io/app-id: "daprpubsubdemo"
+        dapr.io/app-port: "8084"
+        dapr.io/config: "appconfig"
+        dapr.io/sidecar-liveness-probe-delay-seconds: "2m"
+        dapr.io/sidecar-liveness-probe-timeout-seconds: "4m"
+        dapr.io/sidecar-readiness-probe-delay-seconds: "2m"
+        dapr.io/sidecar-readiness-probe-timeout-seconds: "3m"
