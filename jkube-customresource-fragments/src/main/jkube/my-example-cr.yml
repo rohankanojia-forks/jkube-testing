@@ -1,0 +1,10 @@
+apiVersion: my.unique.group/v1alpha1
+kind: Template
+metadata:
+  name: my-example
+  namespace: my-namespace
+spec:
+data: |-
+    spec:    
+      containers:
+        - name: my-container
