@@ -6,7 +6,7 @@
     <parent>
         <groupId>io.helidon.applications</groupId>
         <artifactId>helidon-mp</artifactId>
-        <version>3.0.1</version>
+        <version>3.2.2</version>
         <relativePath/>
     </parent>
     <groupId>org.eclipse.jkube.quickstarts.helidon</groupId>
@@ -16,6 +16,9 @@
     <properties>
       <maven.compiler.source>1.8</maven.compiler.source>
       <maven.compiler.target>1.8</maven.compiler.target>
+      <jkube.version>1.14-SNAPSHOT</jkube.version>
+      <!--jkube.generator.name>rohankanojia/%a:%l</jkube.generator.name-->
+      <!--jkube.generator.tags>develop,1.0.0</jkube.generator.tags-->
     </properties>
 
     <dependencies>
@@ -115,7 +118,52 @@
             <plugin>
                 <groupId>org.eclipse.jkube</groupId>
                 <artifactId>kubernetes-maven-plugin</artifactId>
-                <version>1.8.0</version>
+                <version>${jkube.version}</version>
+                <configuration>
+                  <buildStrategy>jib</buildStrategy>
+                  <images>
+                    <image>
+                        <name>rohankanojia/helidon-starter</name>
+                        <build>
+                            <from>quay.io/jkube/jkube-java:0.0.19</from>
+                            <tags>
+                                <tag>develop</tag>
+                                <tag>1.0.0</tag>
+                            </tags>
+                            <ports>
+                                <port>8080</port>
+                            </ports>
+                            <assembly>
+                                <name>app</name>
+                            </assembly>
+                        </build>
+                    </image>
+                  </images>  
+                  <helm>
+                      <snapshotRepository>
+                          <!--
+                          <name>quay.io</name>
+                          <url>https://quay.io/rohan.kanojia</url>
+                          <type>OCI</type>
+                          -->
+                          <!--
+                          <url>http://localhost:5000</url>
+                          <name>local</name>
+                          <type>OCI</type>
+                          <username>foo</username>
+                          <password>secret</password>
+                          -->
+                          <!--
+                          <name>ghcr.io</name>
+                          <url>https://ghcr.io/r0haaaan</url>
+                          <type>OCI</type>
+                          -->
+                          <name>Docker</name>
+                          <url>https://registry-1.docker.io/rohankanojia</url>
+                          <type>OCI</type>
+                      </snapshotRepository>
+                  </helm>
+                </configuration>
             </plugin>
         </plugins>
     </build>

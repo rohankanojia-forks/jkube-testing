@@ -15,7 +15,7 @@
     <quarkus.platform.version>2.16.5.Final</quarkus.platform.version>
     <skipITs>true</skipITs>
     <surefire-plugin.version>3.0.0-M7</surefire-plugin.version>
-    <jkube.version>1.13.0</jkube.version>
+    <jkube.version>1.14-SNAPSHOT</jkube.version>
   </properties>
   <dependencyManagement>
     <dependencies>

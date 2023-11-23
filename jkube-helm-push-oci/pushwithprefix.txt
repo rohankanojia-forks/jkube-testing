@@ -1,0 +1,18 @@
+"https://ghcr.io/v2/r0haaaan/helm/jkube-helm-push-testing/blobs/sha256:ddab99e41c7db475d0d96ce200d2ff65f593125e73cf1a5fb0aa4d81b2b4f04a"
+request.header.accept="application/vnd.cncf.helm.chart.content.v1.tar+gzip
+request.header.user-agent=Helm/3.11.3
+request.method=HEAD
+url="https://ghcr.io/v2/r0haaaan/helm/jkube-helm-push-testing/blobs/sha256:ddab99e41c7db475d0d96ce200d2ff65f593125e73cf1a5fb0aa4d81b2b4f04a"
+request.header.accept="application/vnd.cncf.helm.config.v1+json, */*"
+request.header.user-agent=Helm/3.11.3
+request.method=HEAD
+url="https://ghcr.io/v2/r0haaaan/helm/jkube-helm-push-testing/blobs/sha256:08c8ec767f2ae90e4b543996063fac0b7be26376a20cdd7718d4841523bae0b9"
+DEBU[0000] fetch response received                       response.header.content-length=73 response.header.content-type=application/json response.header.date="Mon, 09 Oct 2023 10:01:05 GMT" response.header.www-authenticate="Bearer realm=\"https://ghcr.io/token\",service=\"ghcr.io\",scope=\"repository:r0haaaan/helm/jkube-helm-push-testing:pull\"" response.header.x-github-request-id="C978:15C106:6ACF9:DE6FD:6523CF61" response.status="401 Unauthorized" url="https://ghcr.io/v2/r0haaaan/helm/jkube-helm-push-testing/blobs/sha256:08c8ec767f2ae90e4b543996063fac0b7be26376a20cdd7718d4841523bae0b9"
+DEBU[0000] Unauthorized                                  header="Bearer realm=\"https://ghcr.io/token\",service=\"ghcr.io\",scope=\"repository:r0haaaan/helm/jkube-helm-push-testing:pull\""
+DEBU[0000] do request                                    request.header.accept="application/vnd.cncf.helm.config.v1+json, */*" request.header.user-agent=Helm/3.11.3 request.method=HEAD url="https://ghcr.io/v2/r0haaaan/helm/jkube-helm-push-testing/blobs/sha256:08c8ec767f2ae90e4b543996063fac0b7be26376a20cdd7718d4841523bae0b9"
+DEBU[0000] fetch response received                       response.header.content-length=73 response.header.content-type=application/json response.header.date="Mon, 09 Oct 2023 10:01:05 GMT" response.header.www-authenticate="Bearer realm=\"https://ghcr.io/token\",service=\"ghcr.io\",scope=\"repository:r0haaaan/helm/jkube-helm-push-testing:pull\"" response.header.x-github-request-id="C978:15C106:6ACF9:DE6FE:6523CF61" response.status="401 Unauthorized" url="https://ghcr.io/v2/r0haaaan/helm/jkube-helm-push-testing/blobs/sha256:ddab99e41c7db475d0d96ce200d2ff65f593125e73cf1a5fb0aa4d81b2b4f04a"
+DEBU[0000] Unauthorized                                  header="Bearer realm=\"https://ghcr.io/token\",service=\"ghcr.io\",scope=\"repository:r0haaaan/helm/jkube-helm-push-testing:pull\""
+DEBU[0000] do request                                    request.header.accept="application/vnd.cncf.helm.chart.content.v1.tar+gzip, */*" request.header.user-agent=Helm/3.11.3 request.method=HEAD url="https://ghcr.io/v2/r0haaaan/helm/jkube-helm-push-testing/blobs/sha256:ddab99e41c7db475d0d96ce200d2ff65f593125e73cf1a5fb0aa4d81b2b4f04a"
+Error: failed to authorize: failed to fetch oauth token: unexpected status from GET request to https://ghcr.io/token?scope=repository%3Ar0haaaan%2Fhelm%2Fjkube-helm-push-testing%3Apull&scope=repository%3Ar0haaaan%2Fhelm%2Fjkube-helm-push-testing%3Apull%2Cpush&service=ghcr.io: 403 Forbidden
+helm.go:84: [debug] failed to authorize: failed to fetch oauth token: unexpected status from GET request to https://ghcr.io/token?scope=repository%3Ar0haaaan%2Fhelm%2Fjkube-helm-push-testing%3Apull&scope=repository%3Ar0haaaan%2Fhelm%2Fjkube-helm-push-testing%3Apull%2Cpush&service=ghcr.io: 403 Forbidden
+

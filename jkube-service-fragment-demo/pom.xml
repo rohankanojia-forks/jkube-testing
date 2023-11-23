@@ -15,7 +15,7 @@
 	<description>Demo project for Spring Boot with JKube</description>
 	<properties>
 		<java.version>11</java.version>
-                <jkube.version>1.13-SNAPSHOT</jkube.version>
+                <jkube.version>1.14-SNAPSHOT</jkube.version>
 	</properties>
 	<dependencies>
 		<dependency>

@@ -1,0 +1,9 @@
+FROM quay.io/jkube/jkube-java:0.0.19
+ENV JAVA_MAIN_CLASS=org.springframework.boot.loader.JarLauncher JAVA_APP_DIR=/deployments
+LABEL org.label-schema.description="" org.label-schema.version=0.0.1 org.label-schema.schema-version=1.0 org.label-schema.build-date=2023-10-06 org.label-schema.name=jkube-spring-boot3-openshift-docker-image-push org.label-schema.vcs-ref=706fa97b06efd6ac6c048b0ade461b764eb91a66 org.label-schema.vcs-url=git@github.com:rohankanojia-forks/jkube-testing.git
+EXPOSE 8080 8778 9779
+COPY /dependencies/deployments /deployments/
+COPY /spring-boot-loader/deployments /deployments/
+COPY /application/deployments /deployments/
+WORKDIR /deployments
+ENTRYPOINT ["java","org.springframework.boot.loader.JarLauncher"]

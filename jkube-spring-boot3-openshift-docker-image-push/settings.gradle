@@ -1,0 +1,8 @@
+pluginManagement {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+rootProject.name = 'jkube-spring-boot3-openshift-docker-image-push'

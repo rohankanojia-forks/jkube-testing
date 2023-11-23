@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>3.0.11</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>org.eclipse.jkube.demos</groupId>
+	<artifactId>jkube-spring-boot3-layered-image-demo</artifactId>
+	<version>0.0.1</version>
+	<name>jkube-spring-boot3-layered-image-demo</name>
+	<description>Demo project for Spring Boot and JKube Layered Image demo</description>
+	<properties>
+		<java.version>17</java.version>
+                <jkube.version>1.15-SNAPSHOT</jkube.version>
+                <jkube.docker.verbose>true</jkube.docker.verbose>
+                <docker.user>rohankanojia</docker.user>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+                        <plugin>
+                            <groupId>org.eclipse.jkube</groupId>
+                            <artifactId>kubernetes-maven-plugin</artifactId>
+                            <version>${jkube.version}</version>
+                            <configuration>
+                                <generator>
+                                    <config>
+                                        <spring-boot>
+                                            <name>${docker.user}/%a:%v</name>
+                                        </spring-boot>
+                                    </config>
+                                </generator>
+                            </configuration>
+                        </plugin>
+
+		</plugins>
+	</build>
+
+</project>
