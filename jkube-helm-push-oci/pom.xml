@@ -15,7 +15,8 @@
     <quarkus.platform.version>3.2.0.Final</quarkus.platform.version>
     <skipITs>true</skipITs>
     <surefire-plugin.version>3.0.0</surefire-plugin.version>
-    <jkube.version>1.15-SNAPSHOT</jkube.version>
+    <jkube.version>1.15.0</jkube.version>
+    <jkube.build.strategy>jib</jkube.build.strategy>
     <org.slf4j.simpleLogger.defaultLogLevel>trace</org.slf4j.simpleLogger.defaultLogLevel>
   </properties>
   <dependencyManagement>

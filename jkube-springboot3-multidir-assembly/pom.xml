@@ -54,7 +54,7 @@
                                     <image>
                                         <name>${project.groupId}/${project.artifactId}:latest</name>
                                         <build>
-                                            <from>quay.io/jkube/jkube-java:0.0.20</from>
+                                            <!--from>quay.io/jkube/jkube-java:0.0.20</from-->
                                             <assembly>
                                                 <mode>dir</mode>
                                                 <targetDir>/</targetDir>
