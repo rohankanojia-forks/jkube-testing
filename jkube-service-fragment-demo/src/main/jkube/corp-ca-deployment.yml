@@ -1,0 +1,17 @@
+spec:
+  template:
+    spec:
+      volumes:
+        - name: tls
+          csi:
+            driver: cmcs.crypto-services
+            readOnly: true
+            volumeAttributes:
+              cmcs.crypto-services.com/issuer-name: cm-issuer-corpca
+              cmcs.crypto-services.com/issuer-kind: CertificateManagerCorpCA
+              cmcs.crypto-services.com/dns-names: localhost
+              cmcs.crypto-services.com/key-type: RSA-2048
+              cmcs.crypto-services.com/keystore-type: jks
+              cmcs.crypto-services.com/key-usages: server
+              cmcs.crypto-services.com/common-name: localhost
+              # cmcs.crypto-services.com/duration: 2160h

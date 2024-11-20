@@ -1,0 +1,69 @@
+plugins {
+    id 'java'
+    id 'io.quarkus'
+    id 'org.eclipse.jkube.kubernetes' version "1.18-SNAPSHOT"
+    id 'org.eclipse.jkube.openshift' version "1.18-SNAPSHOT"
+}
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+dependencies {
+    implementation 'io.quarkus:quarkus-container-image-buildpack'
+    implementation enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}")
+    implementation 'io.quarkus:quarkus-resteasy-reactive'
+    implementation 'io.quarkus:quarkus-arc'
+    testImplementation 'io.quarkus:quarkus-junit5'
+    testImplementation 'io.rest-assured:rest-assured'
+}
+
+group 'org.eclipse.jkube.testing'
+version '1.0.0-SNAPSHOT'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+test {
+    systemProperty "java.util.logging.manager", "org.jboss.logmanager.LogManager"
+}
+compileJava {
+    options.encoding = 'UTF-8'
+    options.compilerArgs << '-parameters'
+}
+
+compileTestJava {
+    options.encoding = 'UTF-8'
+}
+
+def labelsMap = [:]
+//labelsMap["com.example.label-with-value"] = "foo"
+////labelsMap["version"] = "${project.version}"
+//labelsMap["artifactId"] = "${project.name}"
+
+    /*
+kubernetes {
+    images {
+        image {
+            name = "%g/%a:%l"
+            build {
+                from = "quay.io/jkube/jkube-java:0.0.13"
+                labels = {
+                    version = "${project.version}"
+                    artifactId = "${project.name}"
+                }
+//                entryPoint {
+//                    shell = "java -jar \$HOME/server.jar"
+//                }
+//                entryPoint {
+//                    exec = ["java", "-jar", "/opt/demo/server.jar"]
+//                }
+                entryPoint =["java", "-jar", "/opt/demo/server.jar"]
+            }
+        }
+    }
+}
+    */

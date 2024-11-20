@@ -33,9 +33,9 @@ $ mvn k8s:log
 
 In separate terminal window, try hitting application url:
 ```shell
-$ minikube service jkube-hostpath-volume-demo --url
+$ SERVER_URL=`minikube service jkube-hostpath-volume-demo --url`
 http://192.168.39.214:30948
-$ curl -v -F fileName=first.txt -F file=@/home/rokumar/Downloads/first.txt 192.168.39.214:30948/client/multipart
+$ curl -v -F fileName=first.txt -F file=@/home/rokumar/Downloads/first.txt $SERVER_URL/client/multipart
 *   Trying 192.168.39.214:30948...
 * Connected to 192.168.39.214 (192.168.39.214) port 30948 (#0)
 > POST /client/multipart HTTP/1.1

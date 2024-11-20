@@ -15,6 +15,7 @@
     <quarkus.platform.version>3.6.3</quarkus.platform.version>
     <skipITs>true</skipITs>
     <surefire-plugin.version>3.1.2</surefire-plugin.version>
+    <jkube.version>1.18-SNAPSHOT</jkube.version>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -42,10 +43,11 @@
       <plugin>
         <groupId>org.eclipse.jkube</groupId>
         <artifactId>openshift-maven-plugin</artifactId>
-        <version>1.15.0</version>
+        <version>${jkube.version}</version>
         <configuration>
           <buildOutputKind>DockerImage</buildOutputKind>
           <openshiftPushSecret>quay-secret</openshiftPushSecret>
+           <buildRecreate>imageStream</buildRecreate>
           <generator>
             <config>
               <quarkus>

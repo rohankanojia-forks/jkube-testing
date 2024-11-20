@@ -17,7 +17,7 @@
     <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
     <quarkus.platform.version>1.13.7.Final</quarkus.platform.version>
     <surefire-plugin.version>3.0.0-M5</surefire-plugin.version>
-    <jkube.version>1.14-SNAPSHOT</jkube.version>
+    <jkube.version>1.17-SNAPSHOT</jkube.version>
     <jkube.createExternalUrls>true</jkube.createExternalUrls>
     <jkube.generator.name>quay.io/rohankanojia/${project.artifactId}:${project.version}</jkube.generator.name>
     <!--jkube.enricher.jkube-ingress.host>test.192.168.39.25.nip.io</jkube.enricher.jkube-ingress.host-->

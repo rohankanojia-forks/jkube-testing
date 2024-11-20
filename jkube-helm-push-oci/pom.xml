@@ -15,8 +15,8 @@
     <quarkus.platform.version>3.2.0.Final</quarkus.platform.version>
     <skipITs>true</skipITs>
     <surefire-plugin.version>3.0.0</surefire-plugin.version>
-    <jkube.version>1.15.0</jkube.version>
-    <jkube.build.strategy>jib</jkube.build.strategy>
+    <jkube.version>1.17-SNAPSHOT</jkube.version>
+    <jkube.generator.name>quay.io/rohan.kanojia/%a:%v</jkube.generator.name>
     <org.slf4j.simpleLogger.defaultLogLevel>trace</org.slf4j.simpleLogger.defaultLogLevel>
   </properties>
   <dependencyManagement>
@@ -111,6 +111,7 @@
           <version>${jkube.version}</version>
           <configuration>
                   <helm>
+                      <chart>${project.artifactId}</chart>
                       <snapshotRepository>
                           <name>Docker</name>
                           <url>https://registry-1.docker.io/rohankanojia</url>
@@ -140,7 +141,7 @@
                   <helm>
                       <snapshotRepository>
                           <name>Docker</name>
-                          <url>https://registry-1.docker.io/rohankanojia</url>
+                          <url>https://registry-1.docker.io/rohan.kanojia</url>
                           <type>OCI</type>
                       </snapshotRepository>
                   </helm>
@@ -159,6 +160,7 @@
                 <version>${jkube.version}</version>
                 <configuration>
                   <helm>
+                      <chart>${project.artifactId}</chart>
                       <snapshotRepository>
                           <name>quay.io</name>
                           <url>https://quay.io/rohan.kanojia</url>
@@ -180,6 +182,7 @@
                 <version>${jkube.version}</version>
                 <configuration>
                   <helm>
+                      <chart>${project.artifactId}</chart>
                       <snapshotRepository>
                           <name>ghcr.io</name>
                           <url>https://ghcr.io/r0haaaan</url>
@@ -201,6 +204,7 @@
                 <version>${jkube.version}</version>
                 <configuration>
                   <helm>
+                      <chart>${project.artifactId}</chart>
                       <snapshotRepository>
                           <url>http://localhost:5000</url>
                           <name>local</name>

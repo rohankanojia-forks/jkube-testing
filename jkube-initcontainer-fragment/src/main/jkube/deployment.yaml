@@ -1,14 +1,18 @@
 spec:
   template:
     spec:
-      initContainers:
-      - name: init-image
-        image: init-image:latest
-        imagePullPolicy: Always
-        resources:
-          limits:
-            cpu: 1
-            memory: 1Gi
-          requests:
-            cpu: 3
-            memory: 3Gi
+      containers:
+      - envFrom:
+        - secretRef:
+            name: test-secret
+#      initContainers:
+#      - name: init-image
+#        image: alpine:latest
+#        imagePullPolicy: Always
+#        resources:
+#          limits:
+#            cpu: 1
+#            memory: 1Gi
+#          requests:
+#            cpu: 1
+#           # memory: 1Gi

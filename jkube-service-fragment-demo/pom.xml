@@ -15,7 +15,7 @@
 	<description>Demo project for Spring Boot with JKube</description>
 	<properties>
 		<java.version>11</java.version>
-                <jkube.version>1.14-SNAPSHOT</jkube.version>
+                <jkube.version>1.16.0</jkube.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -39,6 +39,11 @@
                         <plugin>
                                 <groupId>org.eclipse.jkube</groupId>
                                 <artifactId>kubernetes-maven-plugin</artifactId>
+                                <version>${jkube.version}</version>
+                        </plugin>
+                        <plugin>
+                                <groupId>org.eclipse.jkube</groupId>
+                                <artifactId>openshift-maven-plugin</artifactId>
                                 <version>${jkube.version}</version>
                         </plugin>
 		</plugins>
